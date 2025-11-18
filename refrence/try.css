@@ -196,6 +196,7 @@ input:focus, select:focus {
     padding: 1.5rem;
     border-radius: 10px;
     text-align: center;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -213,6 +214,7 @@ input:focus, select:focus {
     background: rgba(255,255,255,0.1);
     padding: 2rem;
     border-radius: 10px;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
