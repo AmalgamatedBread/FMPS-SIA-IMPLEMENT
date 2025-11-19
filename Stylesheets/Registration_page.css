@@ -127,6 +127,7 @@ textarea {
 .login-link a {
   font-size: 14px;
   color: blue;
+  cursor: pointer;
   text-decoration: none;
 }
 

@@ -97,6 +97,7 @@ body {
 .register-link a {
   color: blue;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .register-link a,
