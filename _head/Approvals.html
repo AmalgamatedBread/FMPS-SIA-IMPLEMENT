@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FPMS - Approval Queue</title>
+    <link rel="stylesheet" href="../resources/Stylesheets/side_top.css" />
+    <link rel="stylesheet" href="../resources/Stylesheets/portfolios.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        /* Department Head approvals matching portfolio design */
+        .approval-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .priority-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .priority-btn {
+            padding: 8px 16px;
+            border: 1px solid #dee2e6;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        
+        .priority-btn:hover {
+            background: #f8f9fa;
+        }
+        
+        .priority-btn.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        
+        .faculty-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        
+        .faculty-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .deadline {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin: 5px 0;
+        }
+        
+        .deadline.overdue {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .deadline.today {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .approval-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navigation">
+            <div class="header">
+                <h3 class="nav-header">FPMS - Approval Queue</h3>
+            </div>
+            <div class="search-bar">
+                <input type="search" id="search-input" placeholder="Search submissions..." />
+            </div>
+            <div class="notif-profile">
+                <a href="" title="notifications">
+                    <img src="../resources/icons/notification.png" alt="Notifications" width="33" height="33" />
+                </a>
+                <a href="" title="profile">
+                    <img src="../resources/icons/profile.png" alt="Profile" width="33" height="33" />
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="side-bar">
+            <div class="top-section">
+                <a href="../_head/Department_head_dashboard.html" title="Dashboard">
+                    <img src="../resources/icons/dashboard.png" alt="Dashboard" width="33" height="33" />
+                </a>
+                <a href="Portfolios_head.html" title="Portfolios">
+                    <img src="../resources/icons/portfolios.png" alt="Portfolios" width="33" height="33" />
+                </a>
+                <a href="Approvals.html" title="Approval Queue" id="active-link">
+                    <img src="../resources/icons/approval.png" alt="Approvals" width="33" height="33" />
+                </a>
+                <hr width="60%" size="1" />
+                <a href="../_head/Forward_docs.html" title="Forward">
+                    <img src="../resources/icons/Forward.png" alt="Forward" width="33" height="33" />
+                </a>
+            </div>
+            <div class="bottom-section">
+                <a href="Bin.html" title="Bin">
+                    <img src="../resources/icons/Bin.png" alt="Bin" width="33" height="33" />
+                </a>
+                <a href="Settings.html" title="Settings">
+                    <img src="../resources/icons/settings.png" alt="Settings" width="33" height="33" />
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="portfolio-header">
+                <div class="portfolio-tabs">
+                    <button class="tab-btn active" data-filter="all">
+                        <i class="fas fa-inbox"></i> All Submissions
+                    </button>
+                    <button class="tab-btn" data-filter="urgent">
+                        <i class="fas fa-exclamation-circle"></i> Urgent
+                    </button>
+                    <button class="tab-btn" data-filter="today">
+                        <i class="fas fa-calendar-day"></i> Due Today
+                    </button>
+                    <button class="tab-btn" data-filter="reviewed">
+                        <i class="fas fa-check"></i> Reviewed
+                    </button>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" id="bulkApprove">
+                        <i class="fas fa-check-double"></i> Bulk Approve
+                    </button>
+                    <button class="action-btn" id="exportBtn">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+
+            <div class="breadcrumb">
+                <span class="breadcrumb-item active">Approvals</span>
+                <span class="breadcrumb-separator">›</span>
+                <span class="breadcrumb-item">Department Queue</span>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="approval-stats">
+                <div class="stat-card">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Pending Review</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Urgent</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Reviewed Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">45</div>
+                    <div class="stat-label">Total Approved</div>
+                </div>
+            </div>
+
+            <!-- Priority Filter -->
+            <div class="priority-filter">
+                <button class="priority-btn active" data-priority="all">All Priorities</button>
+                <button class="priority-btn" data-priority="high">High</button>
+                <button class="priority-btn" data-priority="medium">Medium</button>
+                <button class="priority-btn" data-priority="low">Low</button>
+            </div>
+
+            <!-- Approval Queue -->
+            <div class="portfolio-sections" id="approvalQueue">
+                <!-- Submission 1 -->
+                <div class="section urgent" data-priority="high">
+                    <div class="section-header">
+                        <h3><i class="fas fa-file-pdf"></i> Teaching Portfolio - Dr. Sarah Johnson</h3>
+                        <span class="status in-progress">Urgent Review</span>
+                    </div>
+                    <hr class="section-divider" />
+                    
+                    <div class="faculty-info">
+                        <div class="faculty-avatar">SJ</div>
+                        <div>
+                            <h4>Dr. Sarah Johnson</h4>
+                            <p>Associate Professor • Biology Department</p>
+                        </div>
+                    </div>
+                    
+                    <div class="submission-meta">
+                        <span><i class="fas fa-calendar"></i> Submitted: Dec 10, 2024</span>
+                        <span><i class="fas fa-clock"></i> Assigned: 5 days ago</span>
+                    </div>
+                    
+                    <div class="deadline overdue">
+                        <i class="fas fa-exclamation-triangle"></i> Overdue: 2 days
+                    </div>
+                    
+                    <p>Comprehensive teaching portfolio with detailed lesson plans, student feedback analysis, and innovative teaching methodologies.</p>
+                    
+                    <div class="approval-actions">
+                        <button class="icon-btn" title="View Portfolio"><i class="fas fa-eye"></i></button>
+                        <button class="icon-btn approve-btn" title="Approve" style="background: #28a745; color: white;">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="icon-btn revise-btn" title="Request Revision" style="background: #ffc107; color: #333;">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="icon-btn reject-btn" title="Reject" style="background: #dc3545; color: white;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <button class="icon-btn" title="Forward to Dean" style="background: #17a2b8; color: white;">
+                            <i class="fas fa-share"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Submission 2 -->
+                <div class="section" data-priority="medium">
+                    <div class="section-header">
+                        <h3><i class="fas fa-file-word"></i> Research Portfolio - Prof. Michael Chen</h3>
+                        <span class="status submitted">Due Today</span>
+                    </div>
+                    <hr class="section-divider" />
+                    
+                    <div class="faculty-info">
+                        <div class="faculty-avatar">MC</div>
+                        <div>
+                            <h4>Prof. Michael Chen</h4>
+                            <p>Full Professor • Mathematics Department</p>
+                        </div>
+                    </div>
+                    
+                    <div class="submission-meta">
+                        <span><i class="fas fa-calendar"></i> Submitted: Dec 12, 2024</span>
+                        <span><i class="fas fa-clock"></i> Assigned: 2 days ago</span>
+                    </div>
+                    
+                    <div class="deadline today">
+                        <i class="fas fa-calendar-check"></i> Due: Today, 5:00 PM
+                    </div>
+                    
+                    <p>Annual research portfolio documenting 3 published papers, 2 conference presentations, and $150,000 in grant funding secured this year.</p>
+                    
+                    <div class="approval-actions">
+                        <button class="icon-btn" title="View Portfolio"><i class="fas fa-eye"></i></button>
+                        <button class="icon-btn approve-btn" title="Approve" style="background: #28a745; color: white;">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="icon-btn revise-btn" title="Request Revision" style="background: #ffc107; color: #333;">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="icon-btn" title="Forward to Dean" style="background: #17a2b8; color: white;">
+                            <i class="fas fa-share"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Department Head Approval Queue JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterTabs = document.querySelectorAll('.tab-btn');
+            const priorityBtns = document.querySelectorAll('.priority-btn');
+            const approvalSections = document.querySelectorAll('.section');
+            const searchInput = document.getElementById('search-input');
+            const bulkApproveBtn = document.getElementById('bulkApprove');
+            const exportBtn = document.getElementById('exportBtn');
+            
+            // Filter tabs
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active tab
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Apply filter
+                    filterSubmissions(filter, '');
+                });
+            });
+            
+            // Priority filter
+            priorityBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const priority = this.getAttribute('data-priority');
+                    
+                    // Update active button
+                    priorityBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Apply priority filter
+                    const activeTab = document.querySelector('.tab-btn.active');
+                    const tabFilter = activeTab ? activeTab.getAttribute('data-filter') : 'all';
+                    filterSubmissions(tabFilter, priority);
+                });
+            });
+            
+            // Filter function
+            function filterSubmissions(tabFilter, priorityFilter) {
+                approvalSections.forEach(section => {
+                    const isUrgent = section.classList.contains('urgent');
+                    const hasDeadline = section.querySelector('.deadline.today');
+                    const sectionPriority = section.getAttribute('data-priority');
+                    
+                    let show = true;
+                    
+                    // Apply tab filter
+                    if (tabFilter === 'urgent' && !isUrgent) show = false;
+                    if (tabFilter === 'today' && !hasDeadline) show = false;
+                    if (tabFilter === 'reviewed') show = false; // In real app, would check reviewed status
+                    
+                    // Apply priority filter
+                    if (priorityFilter && priorityFilter !== 'all' && sectionPriority !== priorityFilter) {
+                        show = false;
+                    }
+                    
+                    section.style.display = show ? 'block' : 'none';
+                });
+            }
+            
+            // Search functionality
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    
+                    approvalSections.forEach(section => {
+                        const text = section.textContent.toLowerCase();
+                        section.style.display = text.includes(searchTerm) ? 'block' : 'none';
+                    });
+                });
+            }
+            
+            // Bulk approve
+            if (bulkApproveBtn) {
+                bulkApproveBtn.addEventListener('click', function() {
+                    const selected = document.querySelectorAll('.section[style*="display: block"]');
+                    
+                    if (selected.length === 0) {
+                        alert('No submissions visible to approve');
+                        return;
+                    }
+                    
+                    if (confirm(`Approve all ${selected.length} visible submissions?`)) {
+                        selected.forEach(section => {
+                            section.style.opacity = '0.5';
+                            setTimeout(() => {
+                                section.remove();
+                            }, 300);
+                        });
+                        
+                        alert(`Approved ${selected.length} submissions`);
+                    }
+                });
+            }
+            
+            // Export
+            if (exportBtn) {
+                exportBtn.addEventListener('click', function() {
+                    alert('Exporting approval queue data...');
+                });
+            }
+            
+            // Action buttons
+            document.querySelectorAll('.approve-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const section = this.closest('.section');
+                    const title = section.querySelector('h3').textContent;
+                    
+                    if (confirm(`Approve: ${title}?`)) {
+                        section.style.opacity = '0.5';
+                        setTimeout(() => {
+                            section.remove();
+                            alert(`${title} approved successfully`);
+                        }, 300);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.revise-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const section = this.closest('.section');
+                    const title = section.querySelector('h3').textContent;
+                    const feedback = prompt(`Enter revision feedback for ${title}:`);
+                    
+                    if (feedback) {
+                        const feedbackSection = document.createElement('div');
+                        feedbackSection.className = 'feedback-section';
+                        feedbackSection.innerHTML = `
+                            <div class="feedback-header">
+                                <span class="reviewer-info">Your Feedback</span>
+                                <span class="feedback-date">${new Date().toLocaleDateString()}</span>
+                            </div>
+                            <p>"${feedback}"</p>
+                        `;
+                        
+                        section.querySelector('.approval-actions').before(feedbackSection);
+                        section.querySelector('.status').textContent = 'Revisions Requested';
+                        section.querySelector('.status').className = 'status revisions';
+                        
+                        alert(`Revision requested for ${title}`);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.reject-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const section = this.closest('.section');
+                    const title = section.querySelector('h3').textContent;
+                    const reason = prompt(`Enter rejection reason for ${title}:`);
+                    
+                    if (reason) {
+                        section.style.opacity = '0.5';
+                        setTimeout(() => {
+                            section.remove();
+                            alert(`${title} rejected. Reason: ${reason}`);
+                        }, 300);
+                    }
+                });
+            });
+            
+            // View portfolio buttons
+            document.querySelectorAll('.icon-btn[title="View Portfolio"]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const title = this.closest('.section').querySelector('h3').textContent;
+                    alert(`Opening portfolio viewer for: ${title}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

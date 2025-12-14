@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FPMS - Portfolios (Faculty)</title>
+    <link rel="stylesheet" href="../resources/Stylesheets/side_top.css" />
+    <link rel="stylesheet" href="../resources/Stylesheets/portfolios.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navigation">
+            <div class="header">
+                <h3 class="nav-header">FPMS - Portfolios</h3>
+            </div>
+            <div class="search-bar">
+                <input type="search" id="search-input" placeholder="Search documents..." />
+            </div>
+            <div class="notif-profile">
+                <a href="" title="notifications">
+                    <img src="../resources/icons/notification.png" alt="Notifications" width="33" height="33" />
+                </a>
+                <a href="" title="profile">
+                    <img src="../resources/icons/profile.png" alt="Profile" width="33" height="33" />
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="side-bar">
+            <div class="top-section">
+                <a href="../faculty/Faculty_dashboard.html" title="Dashboard">
+                    <img src="../resources/icons/dashboard.png" alt="Dashboard" width="33" height="33" />
+                </a>
+                <a href="Portfolios_faculty.html" title="Portfolios" id="active-link">
+                    <img src="../resources/icons/portfolios.png" alt="Portfolios" width="33" height="33" />
+                </a>
+                <a href="../faculty/My_submissions.html" title="My Submissions">
+                    <img src="../resources/icons/approval.png" alt="My Submissions" width="33" height="33" />
+                </a>
+                <hr width="60%" size="1" />
+                <a href="../faculty/Submit_portfolio.html" title="Submit Portfolio">
+                    <img src="../resources/icons/Forward.png" alt="Submit Portfolio" width="33" height="33" />
+                </a>
+                <a href="Department.html" title="Department">
+                    <img src="../resources/icons/members.png" alt="Department" width="33" height="33" />
+                </a>
+            </div>
+            <div class="bottom-section">
+                <a href="Bin.html" title="Bin">
+                    <img src="../resources/icons/Bin.png" alt="Bin" width="33" height="33" />
+                </a>
+                <a href="Settings.html" title="Settings">
+                    <img src="../resources/icons/settings.png" alt="Settings" width="33" height="33" />
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="portfolio-header">
+                <div class="portfolio-tabs">
+                    <button class="tab-btn active" data-tab="personal">
+                        <i class="fas fa-user"></i> My Portfolios
+                    </button>
+                    <button class="tab-btn" data-tab="shared">
+                        <i class="fas fa-share-alt"></i> Shared with Me
+                    </button>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" id="upload-btn">
+                        <i class="fas fa-cloud-upload-alt"></i> Upload Files
+                    </button>
+                    <button class="action-btn" id="create-folder-btn">
+                        <i class="fas fa-folder-plus"></i> New Folder
+                    </button>
+                </div>
+            </div>
+
+            <div class="breadcrumb" id="breadcrumb">
+                <span class="breadcrumb-item active">Portfolios</span>
+                <span class="breadcrumb-separator">›</span>
+                <span class="breadcrumb-item" id="current-location">My Portfolios</span>
+            </div>
+
+            <!-- TAB CONTENT: My Portfolios -->
+            <div class="tab-content active portfolio-sections" id="personal-content">
+                <!-- My Documents Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-file"></i> My Documents</h3>
+                        <button class="section-action">View All</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="documents-grid">
+                        <div class="document-item">
+                            <div class="doc-icon pdf">PDF</div>
+                            <div class="doc-info">
+                                <h4>Teaching Portfolio 2024</h4>
+                                <p>Updated: Dec 10, 2024 • 2.3 MB</p>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                        <div class="document-item">
+                            <div class="doc-icon word">DOC</div>
+                            <div class="doc-info">
+                                <h4>Research Publications</h4>
+                                <p>Updated: Dec 5, 2024 • 1.8 MB</p>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Folders Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-folder"></i> My Folders</h3>
+                        <button class="section-action">Create New</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="folders-grid">
+                        <div class="folder-item">
+                            <div class="folder-icon">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>Teaching Materials</h4>
+                                <p>15 items • Last opened: Dec 12</p>
+                            </div>
+                        </div>
+                        <div class="folder-item">
+                            <div class="folder-icon">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>Research Papers</h4>
+                                <p>8 items • Last opened: Dec 8</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Portfolios Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-briefcase"></i> My Portfolios</h3>
+                        <button class="section-action">Create Portfolio</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="portfolios-grid">
+                        <div class="portfolio-item">
+                            <div class="portfolio-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="portfolio-info">
+                                <h4>Teaching Portfolio</h4>
+                                <p>Status: <span class="status in-progress">In Progress</span></p>
+                                <p class="progress-text">75% Complete</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="portfolio-icon">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <div class="portfolio-info">
+                                <h4>Research Portfolio</h4>
+                                <p>Status: <span class="status submitted">Submitted</span></p>
+                                <p class="progress-text">100% Complete</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recently Added Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-history"></i> Recently Added</h3>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="recent-grid">
+                        <div class="recent-item">
+                            <div class="recent-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="recent-info">
+                                <h4>Course Syllabus - BIO 101</h4>
+                                <p>Added: 2 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="recent-item">
+                            <div class="recent-icon">
+                                <i class="fas fa-file-word"></i>
+                            </div>
+                            <div class="recent-info">
+                                <h4>Research Proposal Draft</h4>
+                                <p>Added: 1 day ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT: Shared with Me -->
+            <div class="tab-content portfolio-sections" id="shared-content">
+                <!-- Shared Documents Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-share-alt"></i> Shared Documents</h3>
+                        <button class="section-action">View All Shared</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="documents-grid">
+                        <div class="document-item shared">
+                            <div class="doc-icon pdf">PDF</div>
+                            <div class="doc-info">
+                                <h4>Department Meeting Agenda</h4>
+                                <p>Shared by: Department Head • 1.2 MB</p>
+                                <span class="shared-tag">Read Only</span>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div class="document-item shared">
+                            <div class="doc-icon word">DOC</div>
+                            <div class="doc-info">
+                                <h4>Curriculum Guidelines</h4>
+                                <p>Shared by: Curriculum Committee • 2.8 MB</p>
+                                <span class="shared-tag">Can Comment</span>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shared Folders Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-folder-share"></i> Shared Folders</h3>
+                        <button class="section-action">View All</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="folders-grid">
+                        <div class="folder-item">
+                            <div class="folder-icon" style="background-color: #d4edda; color: #155724;">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>Department Resources</h4>
+                                <p>Shared by: Department Head • 42 files</p>
+                            </div>
+                        </div>
+                        <div class="folder-item">
+                            <div class="folder-icon" style="background-color: #d4edda; color: #155724;">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>Faculty Collaboration</h4>
+                                <p>Shared by: Colleagues • 18 files</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="upload-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Upload Files</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Upload modal content would go here.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="folder-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Folder</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Folder creation modal content would go here.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality for Faculty
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const breadcrumbLocation = document.getElementById('current-location');
+            
+            // Initialize tabs
+            function initializeTabs() {
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    content.style.display = 'none';
+                });
+                
+                const personalTab = document.getElementById('personal-content');
+                if (personalTab) {
+                    personalTab.classList.add('active');
+                    personalTab.style.display = 'block';
+                }
+                
+                updateBreadcrumb('personal');
+            }
+            
+            // Tab click event listeners
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    
+                    // Update active tab button
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        content.style.display = 'none';
+                    });
+                    
+                    // Show selected tab content
+                    const selectedTab = document.getElementById(`${tabName}-content`);
+                    if (selectedTab) {
+                        selectedTab.classList.add('active');
+                        selectedTab.style.display = 'block';
+                    }
+                    
+                    // Update breadcrumb
+                    updateBreadcrumb(tabName);
+                });
+            });
+            
+            // Update breadcrumb
+            function updateBreadcrumb(tabName) {
+                const tabNames = {
+                    personal: 'My Portfolios',
+                    shared: 'Shared with Me'
+                };
+                
+                if (breadcrumbLocation && tabNames[tabName]) {
+                    breadcrumbLocation.textContent = tabNames[tabName];
+                }
+            }
+            
+            // Initialize when page loads
+            initializeTabs();
+            
+            // Modal functionality
+            const uploadBtn = document.getElementById('upload-btn');
+            const createFolderBtn = document.getElementById('create-folder-btn');
+            const uploadModal = document.getElementById('upload-modal');
+            const folderModal = document.getElementById('folder-modal');
+            const closeModalButtons = document.querySelectorAll('.close-modal');
+            
+            if (uploadBtn && uploadModal) {
+                uploadBtn.addEventListener('click', () => {
+                    uploadModal.classList.add('active');
+                    uploadModal.style.display = 'flex';
+                });
+            }
+            
+            if (createFolderBtn && folderModal) {
+                createFolderBtn.addEventListener('click', () => {
+                    folderModal.classList.add('active');
+                    folderModal.style.display = 'flex';
+                });
+            }
+            
+            if (closeModalButtons.length > 0) {
+                closeModalButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        if (uploadModal) {
+                            uploadModal.classList.remove('active');
+                            uploadModal.style.display = 'none';
+                        }
+                        if (folderModal) {
+                            folderModal.classList.remove('active');
+                            folderModal.style.display = 'none';
+                        }
+                    });
+                });
+            }
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (event) => {
+                if (uploadModal && event.target === uploadModal) {
+                    uploadModal.classList.remove('active');
+                    uploadModal.style.display = 'none';
+                }
+                if (folderModal && event.target === folderModal) {
+                    folderModal.classList.remove('active');
+                    folderModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

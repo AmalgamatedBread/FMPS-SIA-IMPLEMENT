@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FPMS - College Approvals</title>
+    <link rel="stylesheet" href="../resources/Stylesheets/side_top.css" />
+    <link rel="stylesheet" href="../resources/Stylesheets/portfolios.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        /* Dean approvals matching portfolio design */
+        .department-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .dept-btn {
+            padding: 8px 16px;
+            border: 1px solid #dee2e6;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        
+        .dept-btn:hover {
+            background: #f8f9fa;
+        }
+        
+        .dept-btn.active {
+            background: #6f42c1;
+            color: white;
+            border-color: #6f42c1;
+        }
+        
+        .department-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .dept-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .dept-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background: #6f42c1;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .dept-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            padding: 20px 0;
+            border-top: 1px solid #e9ecef;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .dept-stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .faculty-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .faculty-item {
+            padding: 10px;
+            border-radius: 6px;
+            background: #f8f9fa;
+            font-size: 0.9rem;
+        }
+        
+        .faculty-item.approved {
+            background: #d4edda;
+            border-left: 3px solid #28a745;
+        }
+        
+        .faculty-item.pending {
+            background: #fff3cd;
+            border-left: 3px solid #ffc107;
+        }
+        
+        .dean-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .report-btn {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .report-btn:hover {
+            background: #138496;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navigation">
+            <div class="header">
+                <h3 class="nav-header">FPMS - College Approvals</h3>
+            </div>
+            <div class="search-bar">
+                <input type="search" id="search-input" placeholder="Search departments..." />
+            </div>
+            <div class="notif-profile">
+                <a href="" title="notifications">
+                    <img src="../resources/icons/notification.png" alt="Notifications" width="33" height="33" />
+                </a>
+                <a href="" title="profile">
+                    <img src="../resources/icons/profile.png" alt="Profile" width="33" height="33" />
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="side-bar">
+            <div class="top-section">
+                <a href="../_dean/Dean_dashboard.html" title="Dashboard">
+                    <img src="../resources/icons/dashboard.png" alt="Dashboard" width="33" height="33" />
+                </a>
+                <a href="Portfolios_dean.html" title="Portfolios">
+                    <img src="../resources/icons/portfolios.png" alt="Portfolios" width="33" height="33" />
+                </a>
+                <a href="College_approvals.html" title="College Approvals" id="active-link">
+                    <img src="../resources/icons/approval.png" alt="College Approvals" width="33" height="33" />
+                </a>
+                <hr width="60%" size="1" />
+                <a href="../_dean/Department_progress.html" title="Progress">
+                    <img src="../resources/icons/members.png" alt="Progress" width="33" height="33" />
+                </a>
+            </div>
+            <div class="bottom-section">
+                <a href="Bin.html" title="Bin">
+                    <img src="../resources/icons/Bin.png" alt="Bin" width="33" height="33" />
+                </a>
+                <a href="Settings.html" title="Settings">
+                    <img src="../resources/icons/settings.png" alt="Settings" width="33" height="33" />
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="portfolio-header">
+                <div class="portfolio-tabs">
+                    <button class="tab-btn active" data-dept="all">
+                        <i class="fas fa-university"></i> All Departments
+                    </button>
+                    <button class="tab-btn" data-dept="pending">
+                        <i class="fas fa-clock"></i> Pending Review
+                    </button>
+                    <button class="tab-btn" data-dept="recommended">
+                        <i class="fas fa-thumbs-up"></i> Recommended
+                    </button>
+                    <button class="tab-btn" data-dept="completed">
+                        <i class="fas fa-check-circle"></i> Completed
+                    </button>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" id="generateReport">
+                        <i class="fas fa-chart-bar"></i> Generate Report
+                    </button>
+                    <button class="action-btn" id="bulkApproveAll">
+                        <i class="fas fa-check-double"></i> Approve All
+                    </button>
+                </div>
+            </div>
+
+            <div class="breadcrumb">
+                <span class="breadcrumb-item active">Approvals</span>
+                <span class="breadcrumb-separator">›</span>
+                <span class="breadcrumb-item">College Level</span>
+            </div>
+
+            <!-- College Stats -->
+            <div class="approval-stats">
+                <div class="stat-card">
+                    <div class="stat-value">6</div>
+                    <div class="stat-label">Departments</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">Pending Review</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">142</div>
+                    <div class="stat-label">Approved This Year</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">94%</div>
+                    <div class="stat-label">Completion Rate</div>
+                </div>
+            </div>
+
+            <!-- Department Filter -->
+            <div class="department-filter">
+                <button class="dept-btn active" data-dept="all">All Departments</button>
+                <button class="dept-btn" data-dept="biology">Biology</button>
+                <button class="dept-btn" data-dept="mathematics">Mathematics</button>
+                <button class="dept-btn" data-dept="it">Information Technology</button>
+                <button class="dept-btn" data-dept="environmental">Environmental Science</button>
+                <button class="dept-btn" data-dept="marine">Marine Biology</button>
+            </div>
+
+            <!-- Departments Container -->
+            <div class="portfolio-sections" id="departmentsContainer">
+                <!-- Biology Department -->
+                <div class="department-card" data-dept="biology">
+                    <div class="dept-header">
+                        <div class="dept-icon">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <div>
+                            <h3>Biology Department</h3>
+                            <p>Department Head: Dr. Sarah Johnson • 25 faculty members</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dept-stats">
+                        <div class="dept-stat">
+                            <div class="stat-number">18</div>
+                            <div class="stat-label">Approved</div>
+                        </div>
+                        <div class="dept-stat">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Pending</div>
+                        </div>
+                        <div class="dept-stat">
+                            <div class="stat-number">22</div>
+                            <div class="stat-label">Total</div>
+                        </div>
+                        <div class="dept-stat">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">On Time</div>
+                        </div>
+                    </div>
+                    
+                    <div class="faculty-overview">
+                        <div class="faculty-item approved">Dr. Johnson - Approved</div>
+                        <div class="faculty-item approved">Prof. Smith - Approved</div>
+                        <div class="faculty-item pending">Dr. Wilson - Pending</div>
+                        <div class="faculty-item approved">Dr. Chen - Approved</div>
+                        <div class="faculty-item pending">Prof. Davis - Pending</div>
+                    </div>
+                    
+                    <div class="dean-actions">
+                        <button class="icon-btn view-dept-btn" title="View Department">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="icon-btn approve-dept-btn" title="Approve All" style="background: #28a745; color: white;">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="icon-btn" title="Send Feedback" style="background: #ffc107; color: #333;">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                        <button class="action-btn report-btn">
+                            <i class="fas fa-download"></i> Download Report
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mathematics Department -->
+                <div class="department-card" data-dept="mathematics">
+                    <div class="dept-header">
+                        <div class="dept-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div>
+                            <h3>Mathematics Department</h3>
+                            <p>Department Head: Prof. Michael Chen • 18 faculty members</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dept-stats">
+                        <div class="dept-stat">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">Approved</div>
+                        </div>
+                        <div class="dept-stat">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Pending</div>
+                        </div>
+                        <div class="dept-stat">
+                            <div class="stat-number">18</div>
+                            <div class="stat-label">Total</div>
+                        </div>
+                        <div class="dept-stat">
+                            <div class="stat-number">83%</div>
+                            <div class="stat-label">On Time</div>
+                        </div>
+                    </div>
+                    
+                    <div class="faculty-overview">
+                        <div class="faculty-item approved">Prof. Chen - Approved</div>
+                        <div class="faculty-item pending">Dr. Rodriguez - Pending</div>
+                        <div class="faculty-item approved">Dr. Kim - Approved</div>
+                        <div class="faculty-item pending">Prof. Wilson - Pending</div>
+                    </div>
+                    
+                    <div class="dean-actions">
+                        <button class="icon-btn view-dept-btn" title="View Department">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="icon-btn approve-dept-btn" title="Approve All" style="background: #28a745; color: white;">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="icon-btn" title="Request Revisions" style="background: #fd7e14; color: white;">
+                            <i class="fas fa-undo"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dean College Approvals JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterTabs = document.querySelectorAll('.tab-btn');
+            const deptButtons = document.querySelectorAll('.dept-btn');
+            const departmentCards = document.querySelectorAll('.department-card');
+            const searchInput = document.getElementById('search-input');
+            const generateReportBtn = document.getElementById('generateReport');
+            const bulkApproveAllBtn = document.getElementById('bulkApproveAll');
+            
+            // Tab filtering
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-dept');
+                    
+                    // Update active tab
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Apply filter
+                    filterDepartments(filter, 'all');
+                });
+            });
+            
+            // Department filtering
+            deptButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const dept = this.getAttribute('data-dept');
+                    
+                    // Update active button
+                    deptButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Apply department filter
+                    const activeTab = document.querySelector('.tab-btn.active');
+                    const tabFilter = activeTab ? activeTab.getAttribute('data-dept') : 'all';
+                    filterDepartments(tabFilter, dept);
+                });
+            });
+            
+            // Filter function
+            function filterDepartments(tabFilter, deptFilter) {
+                departmentCards.forEach(card => {
+                    const dept = card.getAttribute('data-dept');
+                    const pendingCount = parseInt(card.querySelector('.dept-stat:nth-child(2) .stat-number').textContent);
+                    
+                    let show = true;
+                    
+                    // Apply tab filter
+                    if (tabFilter === 'pending' && pendingCount === 0) show = false;
+                    if (tabFilter === 'recommended' && dept !== 'biology') show = false; // Example logic
+                    if (tabFilter === 'completed' && pendingCount > 0) show = false;
+                    
+                    // Apply department filter
+                    if (deptFilter !== 'all' && dept !== deptFilter) {
+                        show = false;
+                    }
+                    
+                    card.style.display = show ? 'block' : 'none';
+                });
+            }
+            
+            // Search functionality
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    
+                    departmentCards.forEach(card => {
+                        const text = card.textContent.toLowerCase();
+                        card.style.display = text.includes(searchTerm) ? 'block' : 'none';
+                    });
+                });
+            }
+            
+            // Generate report
+            if (generateReportBtn) {
+                generateReportBtn.addEventListener('click', function() {
+                    const visibleDepts = Array.from(departmentCards).filter(card => 
+                        card.style.display !== 'none'
+                    );
+                    
+                    if (visibleDepts.length === 0) {
+                        alert('No departments to generate report for');
+                        return;
+                    }
+                    
+                    alert(`Generating college approval report for ${visibleDepts.length} departments...`);
+                    // In real app, this would generate and download a PDF/Excel report
+                });
+            }
+            
+            // Bulk approve all
+            if (bulkApproveAllBtn) {
+                bulkApproveAllBtn.addEventListener('click', function() {
+                    const visibleDepts = Array.from(departmentCards).filter(card => 
+                        card.style.display !== 'none'
+                    );
+                    
+                    if (visibleDepts.length === 0) {
+                        alert('No departments to approve');
+                        return;
+                    }
+                    
+                    if (confirm(`Approve all pending submissions in ${visibleDepts.length} visible departments?`)) {
+                        visibleDepts.forEach(card => {
+                            const pendingItems = card.querySelectorAll('.faculty-item.pending');
+                            pendingItems.forEach(item => {
+                                item.className = 'faculty-item approved';
+                                item.textContent = item.textContent.replace('Pending', 'Approved');
+                            });
+                            
+                            // Update stats
+                            const pendingStat = card.querySelector('.dept-stat:nth-child(2) .stat-number');
+                            const approvedStat = card.querySelector('.dept-stat:nth-child(1) .stat-number');
+                            const totalStat = card.querySelector('.dept-stat:nth-child(3) .stat-number');
+                            
+                            const pending = parseInt(pendingStat.textContent);
+                            const approved = parseInt(approvedStat.textContent);
+                            const total = parseInt(totalStat.textContent);
+                            
+                            if (pending > 0) {
+                                pendingStat.textContent = '0';
+                                approvedStat.textContent = (approved + pending).toString();
+                                // Update completion rate
+                                const completionStat = card.querySelector('.dept-stat:nth-child(4) .stat-number');
+                                completionStat.textContent = '100%';
+                            }
+                        });
+                        
+                        alert(`Approved all pending submissions in ${visibleDepts.length} departments`);
+                    }
+                });
+            }
+            
+            // Department actions
+            document.querySelectorAll('.view-dept-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const deptName = this.closest('.department-card').querySelector('h3').textContent;
+                    alert(`Opening detailed view for ${deptName}`);
+                });
+            });
+            
+            document.querySelectorAll('.approve-dept-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.department-card');
+                    const deptName = card.querySelector('h3').textContent;
+                    
+                    if (confirm(`Approve all pending submissions for ${deptName}?`)) {
+                        const pendingItems = card.querySelectorAll('.faculty-item.pending');
+                        
+                        if (pendingItems.length === 0) {
+                            alert(`${deptName} has no pending submissions`);
+                            return;
+                        }
+                        
+                        pendingItems.forEach(item => {
+                            item.className = 'faculty-item approved';
+                            item.textContent = item.textContent.replace('Pending', 'Approved');
+                        });
+                        
+                        // Update stats
+                        const pendingStat = card.querySelector('.dept-stat:nth-child(2) .stat-number');
+                        const approvedStat = card.querySelector('.dept-stat:nth-child(1) .stat-number');
+                        
+                        const pending = parseInt(pendingStat.textContent);
+                        const approved = parseInt(approvedStat.textContent);
+                        
+                        pendingStat.textContent = '0';
+                        approvedStat.textContent = (approved + pending).toString();
+                        
+                        // Update completion rate
+                        const completionStat = card.querySelector('.dept-stat:nth-child(4) .stat-number');
+                        completionStat.textContent = '100%';
+                        
+                        alert(`Approved ${pending} submissions for ${deptName}`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

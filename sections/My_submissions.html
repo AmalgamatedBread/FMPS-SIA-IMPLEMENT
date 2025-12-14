@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FPMS - My Submissions</title>
+    <link rel="stylesheet" href="../resources/Stylesheets/side_top.css" />
+    <link rel="stylesheet" href="../resources/Stylesheets/portfolios.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        /* Faculty submissions matching portfolio design */
+        .submissions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .status-tabs {
+            display: flex;
+            gap: 5px;
+            background: #f8f9fa;
+            padding: 4px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .status-tab {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.2s ease;
+        }
+        
+        .status-tab:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+        
+        .status-tab.active {
+            background: white;
+            color: #007bff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .submission-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+            transition: all 0.2s ease;
+        }
+        
+        .submission-card:hover {
+            border-color: #007bff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .submission-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .submission-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .progress-tracker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        
+        .tracker-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .step-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #dee2e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .step-dot.completed {
+            background: #28a745;
+            color: white;
+        }
+        
+        .step-dot.current {
+            background: #007bff;
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .feedback-section {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid #6c757d;
+        }
+        
+        .feedback-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .reviewer-info {
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .feedback-date {
+            font-size: 0.85rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navigation">
+            <div class="header">
+                <h3 class="nav-header">FPMS - My Submissions</h3>
+            </div>
+            <div class="search-bar">
+                <input type="search" id="search-input" placeholder="Search submissions..." />
+            </div>
+            <div class="notif-profile">
+                <a href="" title="notifications">
+                    <img src="../resources/icons/notification.png" alt="Notifications" width="33" height="33" />
+                </a>
+                <a href="" title="profile">
+                    <img src="../resources/icons/profile.png" alt="Profile" width="33" height="33" />
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="side-bar">
+            <div class="top-section">
+                <a href="../faculty/Faculty_dashboard.html" title="Dashboard">
+                    <img src="../resources/icons/dashboard.png" alt="Dashboard" width="33" height="33" />
+                </a>
+                <a href="Portfolios_faculty.html" title="Portfolios">
+                    <img src="../resources/icons/portfolios.png" alt="Portfolios" width="33" height="33" />
+                </a>
+                <a href="My_submissions.html" title="My Submissions" id="active-link">
+                    <img src="../resources/icons/approval.png" alt="My Submissions" width="33" height="33" />
+                </a>
+                <hr width="60%" size="1" />
+                <a href="../faculty/Submit_portfolio.html" title="Submit Portfolio">
+                    <img src="../resources/icons/Forward.png" alt="Submit Portfolio" width="33" height="33" />
+                </a>
+            </div>
+            <div class="bottom-section">
+                <a href="Bin.html" title="Bin">
+                    <img src="../resources/icons/Bin.png" alt="Bin" width="33" height="33" />
+                </a>
+                <a href="Settings.html" title="Settings">
+                    <img src="../resources/icons/settings.png" alt="Settings" width="33" height="33" />
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="submissions-header">
+                <h2>My Submissions</h2>
+                <button class="action-btn" id="newSubmission">
+                    <i class="fas fa-plus"></i> New Submission
+                </button>
+            </div>
+
+            <!-- Status Tabs -->
+            <div class="status-tabs">
+                <button class="status-tab active" data-filter="all">All</button>
+                <button class="status-tab" data-filter="draft">Drafts</button>
+                <button class="status-tab" data-filter="submitted">Submitted</button>
+                <button class="status-tab" data-filter="review">In Review</button>
+                <button class="status-tab" data-filter="revision">Revisions</button>
+                <button class="status-tab" data-filter="approved">Approved</button>
+            </div>
+
+            <!-- Submissions Container -->
+            <div class="portfolio-sections" id="submissionsContainer">
+                <!-- Submission 1 -->
+                <div class="section" data-status="review">
+                    <div class="section-header">
+                        <h3><i class="fas fa-file-alt"></i> Teaching Portfolio 2024</h3>
+                        <span class="status in-review">In Review</span>
+                    </div>
+                    <hr class="section-divider" />
+                    
+                    <div class="submission-meta">
+                        <span><i class="fas fa-calendar"></i> Submitted: Dec 10, 2024</span>
+                        <span><i class="fas fa-user"></i> Reviewer: Dr. Johnson</span>
+                        <span><i class="fas fa-clock"></i> Last Updated: Today</span>
+                    </div>
+                    
+                    <p>Annual teaching portfolio including course syllabi, student evaluations, and teaching methodology.</p>
+                    
+                    <div class="progress-tracker">
+                        <div class="tracker-step">
+                            <div class="step-dot completed">✓</div>
+                            <div class="step-label">Drafted</div>
+                        </div>
+                        <div class="step-dot completed">✓</div>
+                        <div class="tracker-step">
+                            <div class="step-dot completed">✓</div>
+                            <div class="step-label">Submitted</div>
+                        </div>
+                        <div class="step-dot current">→</div>
+                        <div class="tracker-step">
+                            <div class="step-dot current">3</div>
+                            <div class="step-label">Review</div>
+                        </div>
+                        <div class="step-dot"></div>
+                        <div class="tracker-step">
+                            <div class="step-dot">4</div>
+                            <div class="step-label">Feedback</div>
+                        </div>
+                        <div class="step-dot"></div>
+                        <div class="tracker-step">
+                            <div class="step-dot">5</div>
+                            <div class="step-label">Approved</div>
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-section">
+                        <div class="feedback-header">
+                            <span class="reviewer-info">Dr. Johnson</span>
+                            <span class="feedback-date">Dec 12, 2024 10:30 AM</span>
+                        </div>
+                        <p>"Excellent documentation of teaching methods. Please add more quantitative data from student feedback surveys."</p>
+                    </div>
+                    
+                    <div class="doc-actions">
+                        <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                        <button class="icon-btn" title="Respond"><i class="fas fa-reply"></i></button>
+                        <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                    </div>
+                </div>
+
+                <!-- Submission 2 -->
+                <div class="section" data-status="approved">
+                    <div class="section-header">
+                        <h3><i class="fas fa-flask"></i> Research Portfolio Q4</h3>
+                        <span class="status approved">Approved</span>
+                    </div>
+                    <hr class="section-divider" />
+                    
+                    <div class="submission-meta">
+                        <span><i class="fas fa-calendar"></i> Submitted: Dec 5, 2024</span>
+                        <span><i class="fas fa-check-circle"></i> Approved: Dec 8, 2024</span>
+                        <span><i class="fas fa-user"></i> Reviewer: Prof. Williams</span>
+                    </div>
+                    
+                    <p>Quarterly research portfolio including publications, conference presentations, and ongoing projects.</p>
+                    
+                    <div class="progress-tracker">
+                        <div class="tracker-step">
+                            <div class="step-dot completed">✓</div>
+                            <div class="step-label">Drafted</div>
+                        </div>
+                        <div class="step-dot completed">✓</div>
+                        <div class="tracker-step">
+                            <div class="step-dot completed">✓</div>
+                            <div class="step-label">Submitted</div>
+                        </div>
+                        <div class="step-dot completed">✓</div>
+                        <div class="tracker-step">
+                            <div class="step-dot completed">✓</div>
+                            <div class="step-label">Reviewed</div>
+                        </div>
+                        <div class="step-dot completed">✓</div>
+                        <div class="tracker-step">
+                            <div class="step-dot completed">✓</div>
+                            <div class="step-label">Approved</div>
+                        </div>
+                    </div>
+                    
+                    <div class="doc-actions">
+                        <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                        <button class="icon-btn" title="Download Certificate"><i class="fas fa-award"></i></button>
+                        <button class="icon-btn" title="Share"><i class="fas fa-share"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Faculty Submissions JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusTabs = document.querySelectorAll('.status-tab');
+            const submissionSections = document.querySelectorAll('.section[data-status]');
+            const newSubmissionBtn = document.getElementById('newSubmission');
+            const searchInput = document.getElementById('search-input');
+            
+            // Filter functionality
+            statusTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active tab
+                    statusTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter submissions
+                    submissionSections.forEach(section => {
+                        if (filter === 'all') {
+                            section.style.display = 'block';
+                        } else {
+                            const status = section.getAttribute('data-status');
+                            if (status === filter) {
+                                section.style.display = 'block';
+                            } else {
+                                section.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // New submission
+            if (newSubmissionBtn) {
+                newSubmissionBtn.addEventListener('click', function() {
+                    window.location.href = '../faculty/Submit_portfolio.html';
+                });
+            }
+            
+            // Search functionality
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    
+                    submissionSections.forEach(section => {
+                        const text = section.textContent.toLowerCase();
+                        if (text.includes(searchTerm)) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                });
+            }
+            
+            // Action buttons
+            document.querySelectorAll('.icon-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const title = this.closest('.section').querySelector('h3').textContent;
+                    const action = this.getAttribute('title');
+                    
+                    switch(action) {
+                        case 'View':
+                            alert(`Viewing: ${title}`);
+                            break;
+                        case 'Respond':
+                            const response = prompt(`Enter your response for ${title}:`);
+                            if (response) {
+                                alert(`Response submitted: ${response}`);
+                            }
+                            break;
+                        case 'Download':
+                            alert(`Downloading: ${title}`);
+                            break;
+                        case 'Download Certificate':
+                            alert(`Downloading certificate for: ${title}`);
+                            break;
+                        case 'Share':
+                            alert(`Sharing: ${title}`);
+                            break;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Faculty Dashboard - FPMS</title>
+    <link rel="stylesheet" href="../resources/Stylesheets/side_top.css" />
+    <link rel="stylesheet" href="../resources/Stylesheets/Faculty_dashboard.css" />
+</head>
+<body>
+    <header>
+        <nav class="navigation">
+            <div class="header">
+                <h3 class="nav-header">FPMS - Faculty Dashboard</h3>
+            </div>
+            <div class="search-bar">
+                <input type="search" placeholder="Search..." />
+            </div>
+            <div class="notif-profile">
+                <a href="" title="notifications">
+                    <img src="../resources/icons/notification.png" alt="Notifications" width="33" height="33" />
+                </a>
+                <a href="../sections/Profile.html" title="profile">
+                    <img src="../resources/icons/profile.png" alt="Profile" width="33" height="33" />
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="side-bar">
+            <div class="top-section">
+                <a href="Faculty_dashboard.html" title="Dashboard" id="dashboard">
+                    <img src="../resources/icons/dashboard.png" alt="Dashboard" width="33" height="33" />
+                </a>    
+                <a href="../sections/Portfolios_faculty.html" title="Portfolios">
+                    <img src="../resources/icons/portfolios.png" alt="Portfolios" width="33" height="33" />
+                </a>
+                <a href="My_submissions.html" title="My Submissions">
+                    <img src="../resources/icons/approval.png" alt="My Submissions" width="33" height="33" />
+                </a>
+                <hr width="60%" size="1" />
+                <a href="Submit_portfolio.html" title="Submit Portfolio">
+                    <img src="../resources/icons/Forward.png" alt="Submit Portfolio" width="33" height="33" />
+                </a>
+                <a href="../sections/Department.html" title="Department">
+                    <img src="../resources/icons/members.png" alt="Department" width="33" height="33" />
+                </a>
+            </div>
+            <div class="bottom-section">
+                <a href="../sections/Bin.html" title="Bin">
+                    <img src="../resources/icons/Bin.png" alt="Bin" width="33" height="33" />
+                </a>
+                <a href="../sections/Settings.html" title="Settings">
+                    <img src="../resources/icons/settings.png" alt="Settings" width="33" height="33" />
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="dashboard-stats">
+                <div class="stat-card portfolio-status">
+                    <h3>Portfolio Status</h3>
+                    <p class="stat-number">In Progress</p>
+                    <div class="stat-details">
+                        <span class="detail-item">Last Updated: Dec 10</span>
+                        <span class="detail-item">Completion: 65%</span>
+                    </div>
+                </div>
+                <div class="stat-card pending-submissions">
+                    <h3>Pending Submissions</h3>
+                    <p class="stat-number">3</p>
+                    <div class="stat-details">
+                        <span class="detail-item">Awaiting Review: 1</span>
+                        <span class="detail-item">Drafts: 2</span>
+                    </div>
+                </div>
+                <div class="stat-card approval-rate">
+                    <h3>Approval Rate</h3>
+                    <p class="stat-number">85%</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                        <span class="progress-text">This Academic Year</span>
+                    </div>
+                    <div class="stat-details">
+                        <span class="detail-item">Approved: 17</span>
+                        <span class="detail-item">Rejected: 3</span>
+                    </div>
+                </div>
+                <div class="stat-card deadline">
+                    <h3>Next Deadline</h3>
+                    <p class="stat-number">15</p>
+                    <div class="stat-details">
+                        <span class="detail-item">Days Remaining</span>
+                        <span class="detail-item">Dec 31, 2024</span>
+                    </div>
+                    <div class="deadline-bar">
+                        <div class="time-left" style="width: 50%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="approval-queue">
+                <header>
+                    <h3 class="approval-header">My Portfolio Submissions</h3>
+                </header>
+                <div class="queue-container">
+                    <table class="queue">
+                        <thead>
+                            <tr>
+                                <th>Portfolio Section</th>
+                                <th>Type</th>
+                                <th>Submitted</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Teaching Portfolio - Fall 2024</td>
+                                <td>Teaching</td>
+                                <td>2 days ago</td>
+                                <td><span class="badge pending">Under Review</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn edit">Edit</button>
+                                    <button class="btn delete">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Research Portfolio - Q3 2024</td>
+                                <td>Research</td>
+                                <td>3 days ago</td>
+                                <td><span class="badge approved">Approved</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn edit">Edit</button>
+                                    <button class="btn delete">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Service Portfolio Section</td>
+                                <td>Service</td>
+                                <td>4 days ago</td>
+                                <td><span class="badge revision">Needs Revision</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn edit">Edit</button>
+                                    <button class="btn delete">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Annual Performance Review</td>
+                                <td>Comprehensive</td>
+                                <td>5 days ago</td>
+                                <td><span class="badge draft">Draft</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn edit">Edit</button>
+                                    <button class="btn delete">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif, Arial;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden; /* Prevent body scrolling */
+}
+
+/* Fixed Header */
+.navigation {
+  position: fixed; /* Fix header at top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid lightgrey;
+  justify-content: space-between;
+  box-shadow: 0px 0px 3px;
+  background: white; /* Add background so content doesn't show through */
+}
+
+.header,
+.search-bar,
+.notif-profile {
+  display: flex;
+  align-items: center;
+}
+
+.header {
+  font-size: 20px;
+  flex: 1;
+  padding-left: 10px;
+}
+
+.search-bar {
+  flex: 2;
+  justify-content: center;
+}
+
+.search-bar input {
+  width: 80%;
+  max-width: 500px;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.notif-profile {
+  flex: 1;
+  justify-content: flex-end;
+  gap: 15px;
+  padding-right: 10px;
+}
+
+.notif-profile a {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Main Layout */
+.main-content {
+  display: flex;
+  height: 100vh;
+  padding-top: 60px; /* Match header height */
+}
+
+/* Fixed Sidebar */
+.side-bar {
+  position: fixed;
+  left: 0;
+  top: 60px; /* Start below header */
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-right: 1px solid lightgrey;
+  height: calc(100vh - 60px); /* Full height minus header */
+  background: white; /* Add background */
+  z-index: 900;
+}
+
+.top-section {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+  width: 100%;
+}
+
+.bottom-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+/* Scrollable Content Area */
+.content {
+  flex: 1;
+  margin: 5px 5px 5px 55px; /* Left margin for sidebar */
+  overflow-y: auto; /* Only this area scrolls */
+  height: calc(100vh - 70px); /* Full height minus header and margins */
+  padding: 10px;
+}
+
+a {
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(2px 2px 3px rgb(42, 42, 42));
+}

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FPMS - Portfolios</title>
+    <link rel="stylesheet" href="../resources/Stylesheets/side_top.css" />
+    <link rel="stylesheet" href="../resources/Stylesheets/portfolios.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        /* Additional styles for tab functionality */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Ensure portfolio-sections has proper styling */
+        .portfolio-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navigation">
+            <div class="header">
+                <h3 class="nav-header">FPMS - Portfolios</h3>
+            </div>
+            <div class="search-bar">
+                <input type="search" id="search-input" placeholder="Search documents..." />
+            </div>
+            <div class="notif-profile">
+                <a href="" title="notifications">
+                    <img src="../resources/icons/notification.png" alt="Notifications" width="33" height="33" />
+                </a>
+                <a href="" title="profile">
+                    <img src="../resources/icons/profile.png" alt="Profile" width="33" height="33" />
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="side-bar">
+            <div class="top-section">
+                <a href="../_dean/Dean_dashboard.html" title="Dashboard">
+                    <img src="../resources/icons/dashboard.png" alt="Dashboard" width="33" height="33" />
+                </a>
+                <a href="Portfolios_dean.html" title="Portfolios" id="active-link">
+                    <img src="../resources/icons/portfolios.png" alt="Portfolios" width="33" height="33" />
+                </a>
+                <a href="../_dean/College_approvals.html" title="College Approvals">
+                    <img src="../resources/icons/approval.png" alt="College Approvals" width="33" height="33" />
+                </a>
+                <hr width="60%" size="1" />
+                <a href="../_dean/Department_progress.html" title="Department Progress">
+                    <img src="../resources/icons/members.png" alt="Department Progress" width="33" height="33" />
+                </a>
+                <a href="../_dean/College_reports.html" title="College Reports">
+                    <img src="../resources/icons/settings.png" alt="Reports" width="33" height="33" />
+                </a>
+            </div>
+            <div class="bottom-section">
+                <a href="Bin.html" title="Bin">
+                    <img src="../resources/icons/Bin.png" alt="Bin" width="33" height="33" />
+                </a>
+                <a href="Settings.html" title="Settings">
+                    <img src="../resources/icons/settings.png" alt="Settings" width="33" height="33" />
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="portfolio-header">
+                <div class="portfolio-tabs">
+                    <button class="tab-btn active" data-tab="personal">
+                        <i class="fas fa-user"></i> My Portfolios
+                    </button>
+                    <button class="tab-btn" data-tab="department">
+                        <i class="fas fa-building"></i> Department Portfolios
+                    </button>
+                    <button class="tab-btn" data-tab="archive">
+                        <i class="fas fa-archive"></i> College Archive
+                    </button>
+                    <button class="tab-btn" data-tab="shared">
+                        <i class="fas fa-share-alt"></i> Shared with Me
+                    </button>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" id="upload-btn">
+                        <i class="fas fa-cloud-upload-alt"></i> Upload Files
+                    </button>
+                    <button class="action-btn" id="create-folder-btn">
+                        <i class="fas fa-folder-plus"></i> New Folder
+                    </button>
+                </div>
+            </div>
+
+            <div class="breadcrumb" id="breadcrumb">
+                <span class="breadcrumb-item active">Portfolios</span>
+                <span class="breadcrumb-separator">›</span>
+                <span class="breadcrumb-item" id="current-location">My Portfolios</span>
+            </div>
+
+            <!-- DEAN: Department Filter (only shows on department tab) -->
+            <div class="department-filter" id="department-filter" style="display: none;">
+                <h4>Filter by Department:</h4>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-dept="all">All Departments</button>
+                    <button class="filter-btn" data-dept="biology">Biology</button>
+                    <button class="filter-btn" data-dept="mathematics">Mathematics</button>
+                    <button class="filter-btn" data-dept="it">Information Technology</button>
+                    <button class="filter-btn" data-dept="envi-science">Environmental Science</button>
+                    <button class="filter-btn" data-dept="marine-bio">Marine Biology</button>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT: My Portfolios -->
+            <div class="tab-content active portfolio-sections" id="personal-content">
+                <!-- My Documents Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-file"></i> My Documents</h3>
+                        <button class="section-action">View All</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="documents-grid">
+                        <div class="document-item">
+                            <div class="doc-icon pdf">PDF</div>
+                            <div class="doc-info">
+                                <h4>College Annual Report</h4>
+                                <p>Updated: Dec 14, 2024 • 5.1 MB</p>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                        <div class="document-item">
+                            <div class="doc-icon word">DOC</div>
+                            <div class="doc-info">
+                                <h4>Faculty Meeting Minutes</h4>
+                                <p>Updated: Dec 10, 2024 • 2.3 MB</p>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                        <div class="document-item">
+                            <div class="doc-icon excel">XLS</div>
+                            <div class="doc-info">
+                                <h4>Budget Allocation 2024</h4>
+                                <p>Updated: Dec 5, 2024 • 3.7 MB</p>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Folders Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-folder"></i> My Folders</h3>
+                        <button class="section-action">View All</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="folders-grid">
+                        <div class="folder-item">
+                            <div class="folder-icon">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>Research Papers</h4>
+                                <p>12 files • Last modified: Dec 12, 2024</p>
+                            </div>
+                        </div>
+                        <div class="folder-item">
+                            <div class="folder-icon">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>Administrative</h4>
+                                <p>8 files • Last modified: Dec 10, 2024</p>
+                            </div>
+                        </div>
+                        <div class="folder-item">
+                            <div class="folder-icon">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>Faculty Evaluations</h4>
+                                <p>15 files • Last modified: Dec 8, 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT: Department Portfolios -->
+            <div class="tab-content portfolio-sections" id="department-content">
+                <!-- Department Documents Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-file"></i> Department Documents</h3>
+                        <button class="section-action">View All</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="documents-grid">
+                        <div class="document-item">
+                            <div class="doc-icon pdf">PDF</div>
+                            <div class="doc-info">
+                                <h4>Biology Department Report</h4>
+                                <p>Department: Biology • 3.2 MB</p>
+                                <span class="department-tag">Biology</span>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div class="document-item">
+                            <div class="doc-icon word">DOC</div>
+                            <div class="doc-info">
+                                <h4>Mathematics Curriculum</h4>
+                                <p>Department: Mathematics • 2.1 MB</p>
+                                <span class="department-tag">Mathematics</span>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div class="document-item">
+                            <div class="doc-icon excel">XLS</div>
+                            <div class="doc-info">
+                                <h4>IT Department Budget</h4>
+                                <p>Department: Information Technology • 4.5 MB</p>
+                                <span class="department-tag">IT</span>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div class="document-item">
+                            <div class="doc-icon pdf">PDF</div>
+                            <div class="doc-info">
+                                <h4>Environmental Science Research</h4>
+                                <p>Department: Environmental Science • 6.2 MB</p>
+                                <span class="department-tag">Envi-Science</span>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Department Folders Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-folder"></i> Department Folders</h3>
+                        <button class="section-action">Browse All</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="folders-grid">
+                        <div class="folder-item">
+                            <div class="folder-icon">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>Biology Department</h4>
+                                <p>25 files • Last updated: Dec 13, 2024</p>
+                            </div>
+                        </div>
+                        <div class="folder-item">
+                            <div class="folder-icon">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>Mathematics Department</h4>
+                                <p>18 files • Last updated: Dec 11, 2024</p>
+                            </div>
+                        </div>
+                        <div class="folder-item">
+                            <div class="folder-icon">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>IT Department</h4>
+                                <p>32 files • Last updated: Dec 14, 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT: College Archive -->
+            <div class="tab-content portfolio-sections" id="archive-content">
+                <!-- Archived Documents Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-archive"></i> Archived Portfolios</h3>
+                        <button class="section-action">Browse Archive</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="documents-grid">
+                        <div class="document-item archived">
+                            <div class="doc-icon pdf">PDF</div>
+                            <div class="doc-info">
+                                <h4>2023 Faculty Portfolios</h4>
+                                <p>Archived: Jan 2024 • 25.3 MB</p>
+                                <span class="archive-tag">Academic Year 2023</span>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Restore"><i class="fas fa-undo"></i></button>
+                            </div>
+                        </div>
+                        <div class="document-item archived">
+                            <div class="doc-icon word">DOC</div>
+                            <div class="doc-info">
+                                <h4>2019-2022 College Reports</h4>
+                                <p>Archived: Dec 2022 • 45.7 MB</p>
+                                <span class="archive-tag">Historical Records</span>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Restore"><i class="fas fa-undo"></i></button>
+                            </div>
+                        </div>
+                        <div class="document-item archived">
+                            <div class="doc-icon excel">XLS</div>
+                            <div class="doc-info">
+                                <h4>Old Budget Records</h4>
+                                <p>Archived: Mar 2023 • 12.8 MB</p>
+                                <span class="archive-tag">Financial Archive</span>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Restore"><i class="fas fa-undo"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Archived Folders Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-box-archive"></i> Archived Folders</h3>
+                        <button class="section-action">View All</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="folders-grid">
+                        <div class="folder-item">
+                            <div class="folder-icon" style="background-color: #e9ecef; color: #6c757d;">
+                                <i class="fas fa-archive"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>2020-2021 Academic Year</h4>
+                                <p>48 files • Archived: June 2022</p>
+                            </div>
+                        </div>
+                        <div class="folder-item">
+                            <div class="folder-icon" style="background-color: #e9ecef; color: #6c757d;">
+                                <i class="fas fa-archive"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>Retired Faculty Records</h4>
+                                <p>35 files • Archived: Sep 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT: Shared with Me -->
+            <div class="tab-content portfolio-sections" id="shared-content">
+                <!-- Shared Documents Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-share-alt"></i> Shared Documents</h3>
+                        <button class="section-action">View All Shared</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="documents-grid">
+                        <div class="document-item shared">
+                            <div class="doc-icon pdf">PDF</div>
+                            <div class="doc-info">
+                                <h4>IT Department Budget</h4>
+                                <p>Shared by: Dr. Williams • 1.5 MB</p>
+                                <span class="shared-tag">Read Only</span>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div class="document-item shared">
+                            <div class="doc-icon word">DOC</div>
+                            <div class="doc-info">
+                                <h4>Biology Research Proposal</h4>
+                                <p>Shared by: Prof. Johnson • 3.2 MB</p>
+                                <span class="shared-tag">Can Edit</span>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                        <div class="document-item shared">
+                            <div class="doc-icon excel">XLS</div>
+                            <div class="doc-info">
+                                <h4>Student Enrollment Data</h4>
+                                <p>Shared by: Admissions Office • 4.8 MB</p>
+                                <span class="shared-tag">View Only</span>
+                            </div>
+                            <div class="doc-actions">
+                                <button class="icon-btn" title="View"><i class="fas fa-eye"></i></button>
+                                <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shared Folders Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-folder-share"></i> Shared Folders</h3>
+                        <button class="section-action">View All</button>
+                    </div>
+                    <hr class="section-divider" />
+                    <div class="folders-grid">
+                        <div class="folder-item">
+                            <div class="folder-icon" style="background-color: #d4edda; color: #155724;">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>Faculty Collaboration</h4>
+                                <p>Shared by: Dean's Office • 15 files</p>
+                            </div>
+                        </div>
+                        <div class="folder-item">
+                            <div class="folder-icon" style="background-color: #d4edda; color: #155724;">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="folder-info">
+                                <h4>Inter-department Projects</h4>
+                                <p>Shared by: Project Committee • 22 files</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals (if they exist in your code) -->
+    <div id="upload-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Upload Files</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Upload modal content would go here.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="folder-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Folder</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Folder creation modal content would go here.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // portfolios.js - Tab Switching Functionality (CORRECTED VERSION)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            const breadcrumbLocation = document.getElementById('current-location');
+            const departmentFilter = document.getElementById('department-filter');
+            
+            // Initialize all tabs
+            function initializeTabs() {
+                // Hide all tab contents first
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    content.style.display = 'none';
+                });
+                
+                // Show personal tab by default
+                const personalTab = document.getElementById('personal-content');
+                if (personalTab) {
+                    personalTab.classList.add('active');
+                    personalTab.style.display = 'block';
+                }
+                
+                // Set active tab
+                tabButtons.forEach(btn => {
+                    if (btn.classList.contains('active')) {
+                        const tabName = btn.getAttribute('data-tab');
+                        updateBreadcrumb(tabName);
+                        updateDepartmentFilter(tabName);
+                    }
+                });
+            }
+            
+            // Tab click event listeners
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        content.style.display = 'none';
+                    });
+                    
+                    // Show selected tab content
+                    const selectedTab = document.getElementById(`${tabName}-content`);
+                    if (selectedTab) {
+                        selectedTab.classList.add('active');
+                        selectedTab.style.display = 'block';
+                    }
+                    
+                    // Update breadcrumb
+                    updateBreadcrumb(tabName);
+                    
+                    // Show/hide department filter
+                    updateDepartmentFilter(tabName);
+                });
+            });
+            
+            // Update breadcrumb based on selected tab
+            function updateBreadcrumb(tabName) {
+                const tabNames = {
+                    personal: 'My Portfolios',
+                    department: 'Department Portfolios',
+                    archive: 'College Archive',
+                    shared: 'Shared with Me'
+                };
+                
+                if (breadcrumbLocation && tabNames[tabName]) {
+                    breadcrumbLocation.textContent = tabNames[tabName];
+                }
+            }
+            
+            // Show/hide department filter
+            function updateDepartmentFilter(tabName) {
+                if (departmentFilter) {
+                    departmentFilter.style.display = tabName === 'department' ? 'block' : 'none';
+                }
+            }
+            
+            // Department filter button functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all filter buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Filter department content
+                    const dept = this.getAttribute('data-dept');
+                    filterDepartmentContent(dept);
+                });
+            });
+            
+            // Filter department content
+            function filterDepartmentContent(department) {
+                console.log('Filtering by department:', department);
+                
+                // Get all department document items
+                const departmentItems = document.querySelectorAll('#department-content .document-item');
+                
+                if (department === 'all') {
+                    // Show all items
+                    departmentItems.forEach(item => {
+                        item.style.display = 'flex';
+                    });
+                } else {
+                    // Filter by department
+                    departmentItems.forEach(item => {
+                        const deptTag = item.querySelector('.department-tag');
+                        if (deptTag) {
+                            const deptText = deptTag.textContent.toLowerCase();
+                            if (deptText.includes(department.toLowerCase())) {
+                                item.style.display = 'flex';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        }
+                    });
+                }
+            }
+            
+            // Initialize when page loads
+            initializeTabs();
+            
+            // Modal functionality
+            const uploadBtn = document.getElementById('upload-btn');
+            const createFolderBtn = document.getElementById('create-folder-btn');
+            const uploadModal = document.getElementById('upload-modal');
+            const folderModal = document.getElementById('folder-modal');
+            const closeModalButtons = document.querySelectorAll('.close-modal');
+            
+            // Add modal handling if modals exist
+            if (uploadBtn && uploadModal) {
+                uploadBtn.addEventListener('click', () => {
+                    uploadModal.classList.add('active');
+                    uploadModal.style.display = 'flex';
+                });
+            }
+            
+            if (createFolderBtn && folderModal) {
+                createFolderBtn.addEventListener('click', () => {
+                    folderModal.classList.add('active');
+                    folderModal.style.display = 'flex';
+                });
+            }
+            
+            if (closeModalButtons.length > 0) {
+                closeModalButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        if (uploadModal) {
+                            uploadModal.classList.remove('active');
+                            uploadModal.style.display = 'none';
+                        }
+                        if (folderModal) {
+                            folderModal.classList.remove('active');
+                            folderModal.style.display = 'none';
+                        }
+                    });
+                });
+            }
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (event) => {
+                if (uploadModal && event.target === uploadModal) {
+                    uploadModal.classList.remove('active');
+                    uploadModal.style.display = 'none';
+                }
+                if (folderModal && event.target === folderModal) {
+                    folderModal.classList.remove('active');
+                    folderModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Department Head Dashboard - FPMS</title>
+    <link rel="stylesheet" href="../resources/Stylesheets/side_top.css" />
+    <link rel="stylesheet" href="../resources/Stylesheets/Department_head_dashboard.css" />
+</head>
+<body>
+    <header>
+        <nav class="navigation">
+            <div class="header">
+                <h3 class="nav-header">FPMS - Dept. Head Dashboard</h3>
+            </div>
+            <div class="search-bar">
+                <input type="search" placeholder="Search..." />
+            </div>
+            <div class="notif-profile">
+                <a href="" title="notifications">
+                    <img src="../resources/icons/notification.png" alt="Notifications" width="33" height="33" />
+                </a>
+                <a href="../sections/Profile.html" title="profile">
+                    <img src="../resources/icons/profile.png" alt="Profile" width="33" height="33" />
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="side-bar">
+            <div class="top-section">
+                <a href="Department_head_dashboard.html" title="Dashboard" id="dashboard">
+                    <img src="../resources/icons/dashboard.png" alt="Dashboard" width="33" height="33" />
+                </a>
+                <a href="../sections/Portfolios_head.html" title="Portfolios">
+                    <img src="../resources/icons/portfolios.png" alt="Portfolios" width="33" height="33" />
+                </a>
+                <a href="Approvals.html" title="Approval Queue" id="approval">
+                    <img src="../resources/icons/approval.png" alt="Approvals" width="33" height="33" />
+                </a>
+                <hr width="60%" size="1" />
+                <a href="../sections/Forward_docs.html" title="Forward Documents">
+                    <img src="../resources/icons/Forward.png" alt="Forward Documents" width="33" height="33" />
+                </a>
+                <a href="../sections/Department.html" title="Department">
+                    <img src="../resources/icons/members.png" alt="Department" width="33" height="33" />
+                </a>
+            </div>
+            <div class="bottom-section">
+                <a href="../sections/Bin.html" title="Bin">
+                    <img src="../resources/icons/Bin.png" alt="Bin" width="33" height="33" />
+                </a>
+                <a href="../sections/Settings.html" title="Settings">
+                    <img src="../resources/icons/settings.png" alt="Settings" width="33" height="33" />
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="dashboard-stats">
+                <div class="stat-card awaiting-review">
+                    <h3>Awaiting Review</h3>
+                    <p class="stat-number">0</p>
+                    <div class="stat-details">
+                        <span class="detail-item">0</span>
+                        <span class="detail-item">0</span>
+                    </div>
+                </div>
+                <div class="stat-card awaiting-approval">
+                    <h3>Awaiting Approvals</h3>
+                    <p class="stat-number">0</p>
+                    <div class="stat-details">
+                        <span class="detail-item">0</span>
+                        <span class="detail-item">0</span>
+                    </div>
+                </div>
+                <div class="stat-card submissions">
+                    <h3>Department Submissions</h3>
+                    <p class="stat-number">0</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text">0% Complete</span>
+                    </div>
+                    <div class="stat-details">
+                        <span class="detail-item">On time: 0</span>
+                        <span class="detail-item">Late: 0</span>
+                    </div>
+                </div>
+                <div class="stat-card deadline">
+                    <h3>Days Remaining</h3>
+                    <p class="stat-number deadline-count"></p>
+                    <div class="stat-details">
+                        <span class="detail-item">Deadline: </span>
+                        <span class="detail-item">Cut-off: </span>
+                    </div>
+                    <div class="deadline-bar">
+                        <div class="time-left" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="approval-queue">
+                <header>
+                    <h3 class="approval-header">Approval Queue - Urgent Attention</h3>
+                </header>
+                <div class="queue-container">
+                    <table class="queue">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Faculty</th>
+                                <th>Type</th>
+                                <th>Submitted</th>
+                                <th>Priority</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Research Ethics Approval - Phase 2</td>
+                                <td>Dr. Smith</td>
+                                <td>Research Proposal</td>
+                                <td>2 days ago</td>
+                                <td><span class="badge urgent">Urgent</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn approve">Approve</button>
+                                    <button class="btn reject">Reject</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Annual Performance Report 2024</td>
+                                <td>Prof. Johnson</td>
+                                <td>Report</td>
+                                <td>3 days ago</td>
+                                <td><span class="badge high">High</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn approve">Approve</button>
+                                    <button class="btn reject">Reject</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Curriculum Revision Proposal</td>
+                                <td>Dr. Williams</td>
+                                <td>Curriculum</td>
+                                <td>4 days ago</td>
+                                <td><span class="badge medium">Medium</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn approve">Approve</button>
+                                    <button class="btn reject">Reject</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lab Equipment Purchase Request</td>
+                                <td>Dr. Brown</td>
+                                <td>Purchase</td>
+                                <td>5 days ago</td>
+                                <td><span class="badge low">Low</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn approve">Approve</button>
+                                    <button class="btn reject">Reject</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Conference Attendance Approval</td>
+                                <td>Dr. Davis</td>
+                                <td>Travel</td>
+                                <td>6 days ago</td>
+                                <td><span class="badge low">Low</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn approve">Approve</button>
+                                    <button class="btn reject">Reject</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

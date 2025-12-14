@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dean Dashboard - FPMS</title>
+    <link rel="stylesheet" href="../resources/Stylesheets/side_top.css" />
+    <link rel="stylesheet" href="../resources/Stylesheets/Dean_dashboard.css" />
+</head>
+<body>
+    <header>
+        <nav class="navigation">
+            <div class="header">
+                <h3 class="nav-header">FPMS - Dean Dashboard</h3>
+            </div>
+            <div class="search-bar">
+                <input type="search" placeholder="Search..." />
+            </div>
+            <div class="notif-profile">
+                <a href="" title="notifications">
+                    <img src="../resources/icons/notification.png" alt="Notifications" width="33" height="33" />
+                </a>
+                <a href="../sections/Profile.html" title="profile">
+                    <img src="../resources/icons/profile.png" alt="Profile" width="33" height="33" />
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="side-bar">
+            <div class="top-section">
+                <a href="Dean_dashboard.html" title="Dashboard" id="dashboard">
+                    <img src="../resources/icons/dashboard.png" alt="Dashboard" width="33" height="33" />
+                </a>
+                <a href="../sections/Portfolios_dean.html" title="College Portfolios">
+                    <img src="../resources/icons/portfolios.png" alt="College Portfolios" width="33" height="33" />
+                </a>
+                <a href="College_approvals.html" title="College Approvals">
+                    <img src="../resources/icons/approval.png" alt="College Approvals" width="33" height="33" />
+                </a>
+                <hr width="60%" size="1" />
+                <a href="Department_progress.html" title="Department Progress">
+                    <img src="../resources/icons/members.png" alt="Department Progress" width="33" height="33" />
+                </a>
+                <a href="College_reports.html" title="College Reports">
+                    <img src="../resources/icons/settings.png" alt="Reports" width="33" height="33" />
+                </a>
+            </div>
+            <div class="bottom-section">
+                <a href="../sections/Bin.html" title="Bin">
+                    <img src="../resources/icons/Bin.png" alt="Bin" width="33" height="33" />
+                </a>
+                <a href="../sections/Settings.html" title="Settings">
+                    <img src="../resources/icons/settings.png" alt="Settings" width="33" height="33" />
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- DEAN: COLLEGE OVERVIEW STATS -->
+            <div class="dashboard-stats">
+                <div class="stat-card college-submissions">
+                    <h3>College Submissions</h3>
+                    <p class="stat-number">78%</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 78%"></div>
+                        </div>
+                        <span class="progress-text">Overall Completion</span>
+                    </div>
+                    <div class="stat-details">
+                        <span class="detail-item">Submitted: 156/200</span>
+                        <span class="detail-item">Pending: 44</span>
+                    </div>
+                </div>
+                <div class="stat-card college-approvals">
+                    <h3>Pending Approvals</h3>
+                    <p class="stat-number">12</p>
+                    <div class="stat-details">
+                        <span class="detail-item">Department Heads: 8</span>
+                        <span class="detail-item">College Level: 4</span>
+                    </div>
+                </div>
+                <div class="stat-card archived-portfolios">
+                    <h3>Archived Portfolios</h3>
+                    <p class="stat-number">120</p>
+                    <div class="stat-details">
+                        <span class="detail-item">This Year: 120</span>
+                        <span class="detail-item">Total: 1,250</span>
+                    </div>
+                </div>
+                <div class="stat-card compliance-status">
+                    <h3>Compliance Status</h3>
+                    <p class="stat-number">92%</p>
+                    <div class="stat-details">
+                        <span class="detail-item">5/5 Departments</span>
+                        <span class="detail-item">On Track</span>
+                    </div>
+                    <div class="compliance-bar">
+                        <div class="compliance-level" style="width: 92%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DEAN: DEPARTMENT PROGRESS OVERVIEW -->
+            <div class="department-progress">
+                <header>
+                    <h3 class="progress-header">Department Progress Overview</h3>
+                </header>
+                <div class="progress-container">
+                    <table class="progress-table">
+                        <thead>
+                            <tr>
+                                <th>Department</th>
+                                <th>Head</th>
+                                <th>Faculty Count</th>
+                                <th>Submitted</th>
+                                <th>Approved</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Biology</td>
+                                <td>Dr. Smith</td>
+                                <td>25</td>
+                                <td>24/25 (96%)</td>
+                                <td>22/25 (88%)</td>
+                                <td><span class="status-badge excellent">Excellent</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn report">Report</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mathematics</td>
+                                <td>Dr. Johnson</td>
+                                <td>18</td>
+                                <td>14/18 (78%)</td>
+                                <td>10/18 (56%)</td>
+                                <td><span class="status-badge needs-attention">Needs Attention</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn remind">Remind</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Information Technology</td>
+                                <td>Dr. Williams</td>
+                                <td>22</td>
+                                <td>19/22 (86%)</td>
+                                <td>16/22 (73%)</td>
+                                <td><span class="status-badge good">Good</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn monitor">Monitor</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Environmental Science</td>
+                                <td>Dr. Brown</td>
+                                <td>15</td>
+                                <td>14/15 (93%)</td>
+                                <td>13/15 (87%)</td>
+                                <td><span class="status-badge excellent">Excellent</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn report">Report</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Marine Biology</td>
+                                <td>Dr. Davis</td>
+                                <td>12</td>
+                                <td>10/12 (83%)</td>
+                                <td>9/12 (75%)</td>
+                                <td><span class="status-badge good">Good</span></td>
+                                <td class="actions">
+                                    <button class="btn view">View</button>
+                                    <button class="btn monitor">Monitor</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- DEAN: COLLEGE APPROVAL QUEUE -->
+            <div class="approval-queue">
+                <header>
+                    <h3 class="approval-header">College Approval Queue</h3>
+                </header>
+                <div class="queue-container">
+                    <table class="queue">
+                        <thead>
+                            <tr>
+                                <th>Portfolio</th>
+                                <th>Department</th>
+                                <th>Faculty</th>
+                                <th>Submitted</th>
+                                <th>Priority</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Promotion Portfolio - Full Professor</td>
+                                <td>Biology</td>
+                                <td>Dr. Maria Santos</td>
+                                <td>2 days ago</td>
+                                <td><span class="badge urgent">Urgent</span></td>
+                                <td class="actions">
+                                    <button class="btn review">Review</button>
+                                    <button class="btn approve">Approve</button>
+                                    <button class="btn return">Return</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tenure Review Portfolio</td>
+                                <td>Mathematics</td>
+                                <td>Prof. James Wilson</td>
+                                <td>3 days ago</td>
+                                <td><span class="badge high">High</span></td>
+                                <td class="actions">
+                                    <button class="btn review">Review</button>
+                                    <button class="btn approve">Approve</button>
+                                    <button class="btn return">Return</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Research Grant Portfolio</td>
+                                <td>Information Technology</td>
+                                <td>Dr. Lisa Chen</td>
+                                <td>4 days ago</td>
+                                <td><span class="badge medium">Medium</span></td>
+                                <td class="actions">
+                                    <button class="btn review">Review</button>
+                                    <button class="btn approve">Approve</button>
+                                    <button class="btn return">Return</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Annual Performance Review</td>
+                                <td>Environmental Science</td>
+                                <td>Prof. Robert Kim</td>
+                                <td>5 days ago</td>
+                                <td><span class="badge low">Low</span></td>
+                                <td class="actions">
+                                    <button class="btn review">Review</button>
+                                    <button class="btn approve">Approve</button>
+                                    <button class="btn return">Return</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
